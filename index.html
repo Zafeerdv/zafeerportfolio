@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Meta Basics -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Raja Zafeer — Full Stack Developer. I build modern, scalable, and user-friendly web applications." />
+  <meta name="author" content="Raja Zafeer" />
+  <meta name="theme-color" content="#0b0f14" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="Raja Zafeer — Full Stack Developer" />
+  <meta property="og:description" content="I build modern, scalable, and user-friendly web applications." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://cdn.builder.io/api/v1/image/assets%2F80f15d3d7586408ba0faa60bfef771a0%2F204b7feb98904bea862acce9318a7d3f?format=webp&width=800" />
+  <meta property="og:url" content="" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <title>Raja Zafeer — Full Stack Developer</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Styles (Dark Theme + Animations) -->
+  <style>
+    :root {
+      --accent: #7f5cff;
+      --bg: #0b0f14;
+      --surface: #0f141a;
+      --surface-2: #131922;
+      --text: #e6edf3;
+      --muted: #9aa4b2;
+      --border: #1f2a37;
+      --parallax: 0px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans'; color: var(--text); background: linear-gradient(180deg, #0b0f14 0%, #0c1117 100%); }
+
+    /* Utilities */
+    .bg-surface { background: var(--surface); }
+    .text-muted { color: var(--muted) !important; }
+    .border-subtle { border-color: var(--border) !important; }
+    .shadow-soft { box-shadow: 0 14px 40px rgba(0,0,0,.25); }
+
+    /* Navbar */
+    .navbar { transition: box-shadow .25s ease, background-color .25s ease, border-color .25s ease, transform .5s ease; border-bottom: 1px solid transparent; transform: translateY(-12px); opacity: 0; }
+    .navbar.ready { transform: none; opacity: 1; }
+    .navbar.stuck { box-shadow: 0 6px 24px rgba(0,0,0,.35); background: rgba(13,17,23,.72); backdrop-filter: saturate(160%) blur(8px); border-bottom-color: var(--border); }
+    .navbar .nav-link { font-weight: 600; color: #cbd5e1; position: relative; }
+    .navbar .nav-link:focus, .navbar .nav-link:hover { color: var(--accent) !important; }
+    .navbar .nav-link::after { content: ""; position: absolute; left: 0; bottom: .2rem; width: 0; height: 2px; background: var(--accent); transition: width .25s ease; }
+    .navbar .nav-link:hover::after, .navbar .nav-link:focus::after { width: 100%; }
+
+    /* Buttons */
+    .btn-accent { --bs-btn-bg: var(--accent); --bs-btn-border-color: var(--accent); --bs-btn-hover-bg: #7350ff; --bs-btn-hover-border-color: #7350ff; --bs-btn-active-bg: #6947ff; --bs-btn-active-border-color: #6947ff; color: #fff; box-shadow: 0 8px 24px rgba(127,92,255,.35); transition: transform .2s ease, box-shadow .2s ease; }
+    .btn-accent:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(127,92,255,.45); }
+    .btn-soft { background: var(--surface); color: var(--text); border-color: var(--border); transition: transform .2s ease, background .2s ease; }
+    .btn-soft:hover { background: var(--surface-2); border-color: var(--border); transform: translateY(-2px); }
+
+    /* Hero */
+    .hero { padding-top: 6.25rem; padding-bottom: 4rem; position: relative; overflow: hidden; }
+    .hero::before { content: ""; position: absolute; inset: -20% -10% -10% -10%; background: radial-gradient(50% 40% at 20% 10%, rgba(127,92,255,.18) 0%, transparent 60%), radial-gradient(50% 40% at 80% 0%, rgba(127,92,255,.12) 0%, transparent 50%); transform: translateY(calc(var(--parallax) * -0.08)); will-change: transform; pointer-events: none; }
+    .hero .display-4 { letter-spacing: -0.5px; }
+    .tagline { color: var(--muted); }
+
+    /* Profile */
+    .profile-wrap { position: relative; max-width: 320px; margin-inline: auto; perspective: 900px; }
+    .profile-img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 50%; border: 6px solid var(--surface); box-shadow: 0 24px 70px rgba(0,0,0,.45); transition: transform .2s ease, box-shadow .2s ease; animation: floatY 6s ease-in-out infinite alternate, glowPulse 4s ease-in-out infinite; transform-style: preserve-3d; }
+    .profile-ring { position: absolute; inset: -12px; border-radius: 50%; padding: 12px; background: conic-gradient(from 0deg, rgba(127,92,255,.0), rgba(127,92,255,.35), rgba(127,92,255,.0)); -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 12px), #000 0); mask: radial-gradient(farthest-side, transparent calc(100% - 12px), #000 0); pointer-events: none; animation: spinSlow 14s linear infinite; }
+
+    @keyframes floatY { from { transform: translateY(0) } to { transform: translateY(-10px) } }
+    @keyframes glowPulse { 0%,100% { box-shadow: 0 24px 70px rgba(127,92,255,.25); } 50% { box-shadow: 0 28px 90px rgba(127,92,255,.45); } }
+    @keyframes spinSlow { to { transform: rotate(360deg); } }
+
+    /* Sections */
+    section { scroll-margin-top: 90px; }
+    .section-title { font-weight: 700; letter-spacing: -0.3px; position: relative; display: inline-block; }
+    .section-title::after { content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 3px; border-radius: 2px; background: linear-gradient(90deg, transparent, var(--accent), transparent); transform: scaleX(0); transform-origin: left; transition: transform .6s ease; }
+    .section-title.show-underline::after { transform: scaleX(1); }
+
+    /* Cards */
+    .card { background: var(--surface); color: var(--text); border: 1px solid var(--border); box-shadow: 0 14px 40px rgba(0,0,0,.25); transition: transform .2s ease, box-shadow .2s ease; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 18px 48px rgba(0,0,0,.35); }
+
+    /* Skills */
+    .skill-badge { background: rgba(127,92,255,.12); color: #c8c3ff; border: 1px solid rgba(127,92,255,.28); font-weight: 600; transition: transform .2s ease, box-shadow .2s ease; }
+    .skill-badge:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(127,92,255,.15); }
+
+    /* Progress */
+    .progress { background-color: #141b24; border: 1px solid var(--border); height: 10px; overflow: hidden; }
+    .progress-bar { background: linear-gradient(90deg, #5d43ff 0%, #7f5cff 50%, #a086ff 100%); width: 0; transition: width 1.1s ease; }
+
+    /* Reveal animations */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.show { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+
+    /* Footer + Social */
+    footer { border-top: 1px solid var(--border) !important; }
+    .social-link { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--surface); color: var(--text); border: 1px solid var(--border); transition: transform .2s ease, background .2s ease; }
+    .social-link:hover, .social-link:focus { background: var(--accent); color: #fff; border-color: var(--accent); transform: translateY(-2px) rotate(-2deg); }
+
+    /* Focus visible */
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+
+    /* Mobile refinements */
+    @media (max-width: 575.98px) {
+      .hero { padding-top: 5.5rem; }
+      .display-4 { font-size: 2.25rem; }
+    }
+  </style>
+
+  <!-- JSON-LD Person Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Raja Zafeer",
+    "jobTitle": "Full Stack Developer",
+    "description": "I build modern, scalable, and user-friendly web applications.",
+    "email": "mailto:rajazafeer461@gmail.com",
+    "telephone": "+92-348-5202559",
+    "image": "https://cdn.builder.io/api/v1/image/assets%2F80f15d3d7586408ba0faa60bfef771a0%2F204b7feb98904bea862acce9318a7d3f?format=webp&width=800",
+    "url": "",
+    "sameAs": [
+      "https://github.com/USERNAME",
+      "https://www.linkedin.com/in/USERNAME"
+    ]
+  }
+  </script>
+
+  <!-- Example dataset (how to replace placeholders)
+  {
+    "PROJECT_1_IMAGE": "https://images.example.com/proj1.png",
+    "PROJECT_1_TITLE": "Analytics Dashboard",
+    "PROJECT_1_DESC": "A real-time analytics dashboard with granular filters and role-based access.",
+    "PROJECT_1_TECH": "React, Node.js, PostgreSQL",
+    "DEMO_LINK_1": "https://demo.example.com/analytics",
+    "SOURCE_LINK_1": "https://github.com/raja/analytics"
+  }
+  -->
+</head>
+
+<body data-bs-spy="scroll" data-bs-target="#topNav" data-bs-offset="90" tabindex="-1">
+  <!-- Navbar -->
+  <nav id="topNav" class="navbar navbar-expand-lg navbar-dark fixed-top bg-transparent">
+    <div class="container">
+      <a class="navbar-brand fw-bold reveal show" href="#home" aria-label="Go to home">
+        <span class="text-light">Raja</span> <span style="color: var(--accent);">Zafeer</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+        <div class="d-none d-lg-flex ms-3">
+          <a class="btn btn-sm btn-accent me-2" href="#contact" role="button" aria-label="Hire me button">Hire Me</a>
+          <a class="btn btn-sm btn-outline-light" href="#contact" role="button" aria-label="Download CV button">Download CV</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main id="home" class="hero">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-12 col-lg-6 order-2 order-lg-1 reveal">
+          <h1 class="display-4 fw-bold mb-3">Raja Zafeer</h1>
+          <h2 class="h4 text-light fw-semibold mb-3">Full Stack Developer</h2>
+          <p class="lead tagline mb-4">I build modern, scalable, and user-friendly web applications.</p>
+          <div class="d-flex flex-wrap gap-2">
+            <a class="btn btn-accent btn-lg" href="#contact" role="button" aria-label="Hire Raja">Hire Me</a>
+            <a class="btn btn-outline-light btn-lg" href="#contact" role="button" aria-label="Download Raja's CV">Download CV</a>
+          </div>
+        </div>
+        <div class="col-12 col-lg-6 text-center order-1 order-lg-2 reveal reveal-delay-1">
+          <div class="profile-wrap" id="profileTilt">
+            <span class="profile-ring" aria-hidden="true"></span>
+            <img class="profile-img" src="https://cdn.builder.io/api/v1/image/assets%2F80f15d3d7586408ba0faa60bfef771a0%2F204b7feb98904bea862acce9318a7d3f?format=webp&width=800" alt="Portrait of Raja Zafeer" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- About -->
+  <section id="about" class="py-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <h3 class="section-title mb-3">About</h3>
+          <div class="reveal">
+            <p class="mb-3 text-muted">I am a passionate Full Stack Developer focused on building high-quality, user-centered applications. I love turning complex problems into elegant, performant, and scalable solutions across the stack.</p>
+            <p class="mb-3 text-muted">My approach blends modern tooling with pragmatic engineering: clean code, accessible interfaces, and resilient backends. I enjoy collaborating with teams, iterating quickly, and shipping features that deliver real value.</p>
+            <p class="mb-0 text-muted">Paste a longer bio here to expand on your experience, philosophy, and the technologies you enjoy working with. You can describe notable achievements, open-source contributions, and what you're currently exploring.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="py-5 bg-surface">
+    <div class="container">
+      <h3 class="section-title mb-4">Skills</h3>
+      <div class="row g-4">
+        <div class="col-md-4 reveal">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Frontend</h5>
+              <div class="d-flex flex-wrap gap-2 mt-3 stagger-on-show">
+                <span class="badge rounded-pill skill-badge">HTML5</span>
+                <span class="badge rounded-pill skill-badge">CSS3</span>
+                <span class="badge rounded-pill skill-badge">JavaScript (ES6+)</span>
+                <span class="badge rounded-pill skill-badge">Bootstrap 5</span>
+                <span class="badge rounded-pill skill-badge">Figma</span>
+                <span class="badge rounded-pill skill-badge">React</span>
+              </div>
+              <div class="mt-4" aria-label="Frontend proficiency">
+                <div class="small text-muted mb-1">HTML — 95%</div>
+                <div class="progress" role="progressbar" aria-label="HTML proficiency" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
+                  <div class="progress-bar" data-progress="95"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 reveal reveal-delay-1">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Backend</h5>
+              <div class="d-flex flex-wrap gap-2 mt-3 stagger-on-show">
+                <span class="badge rounded-pill skill-badge">Python</span>
+                <span class="badge rounded-pill skill-badge">Django</span>
+                <span class="badge rounded-pill skill-badge">Flask</span>
+                <span class="badge rounded-pill skill-badge">PostgreSQL</span>
+                <span class="badge rounded-pill skill-badge">REST APIs</span>
+                <span class="badge rounded-pill skill-badge">MySQL</span>
+              </div>
+              <div class="mt-4" aria-label="Backend proficiency">
+                <div class="small text-muted mb-1">Python — 92%</div>
+                <div class="progress" role="progressbar" aria-label="Python proficiency" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100">
+                  <div class="progress-bar" data-progress="92"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 reveal reveal-delay-2">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Tools</h5>
+              <div class="d-flex flex-wrap gap-2 mt-3 stagger-on-show">
+                <span class="badge rounded-pill skill-badge">Git</span>
+                <span class="badge rounded-pill skill-badge">GitHub</span>
+                <span class="badge rounded-pill skill-badge">Docker</span>
+                <span class="badge rounded-pill skill-badge">Postman</span>
+                <span class="badge rounded-pill skill-badge">VS Code</span>
+                <span class="badge rounded-pill skill-badge">Linux</span>
+                <span class="badge rounded-pill skill-badge">CI/CD</span>
+                <span class="badge rounded-pill skill-badge">Jira</span>
+              </div>
+              <div class="mt-4" aria-label="Tools proficiency">
+                <div class="small text-muted mb-1">Git — 90%</div>
+                <div class="progress" role="progressbar" aria-label="Git proficiency" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+                  <div class="progress-bar" data-progress="90"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="py-5">
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
+        <h3 class="section-title mb-0">Projects</h3>
+        <a class="btn btn-soft btn-sm" href="#contact" aria-label="Discuss a project">Let's work together</a>
+      </div>
+      <div class="row g-4">
+        <!-- Project 1 -->
+        <div class="col-12 col-md-6 col-lg-4 reveal">
+          <div class="card h-100">
+            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=60" class="card-img-top" alt="RealWorld Medium Clone screenshot" loading="lazy">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">RealWorld Medium Clone</h5>
+              <p class="card-text flex-grow-1 text-muted">Full-stack example showcasing real-world app specs and API.</p>
+              <p class="small text-muted mb-3">Tech: React, Node, REST API</p>
+              <div class="d-flex gap-2 mt-auto">
+                <a class="btn btn-sm btn-accent" href="https://demo.realworld.io/" target="_blank" rel="noopener" aria-label="Open demo for project 1">Live Demo</a>
+                <a class="btn btn-sm btn-outline-light" href="https://github.com/gothinkster/realworld" target="_blank" rel="noopener" aria-label="Open source code for project 1">Source</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Project 2 -->
+        <div class="col-12 col-md-6 col-lg-4 reveal reveal-delay-1">
+          <div class="card h-100">
+            <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1200&q=60" class="card-img-top" alt="Django REST Framework Demo screenshot" loading="lazy">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Django REST Framework Demo</h5>
+              <p class="card-text flex-grow-1 text-muted">Browsable API with authentication and endpoints.</p>
+              <p class="small text-muted mb-3">Tech: Python, Django, DRF</p>
+              <div class="d-flex gap-2 mt-auto">
+                <a class="btn btn-sm btn-accent" href="https://demo.django-rest-framework.org/" target="_blank" rel="noopener" aria-label="Open demo for project 2">Live Demo</a>
+                <a class="btn btn-sm btn-outline-light" href="https://github.com/encode/django-rest-framework" target="_blank" rel="noopener" aria-label="Open source code for project 2">Source</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Project 3 -->
+        <div class="col-12 col-md-6 col-lg-4 reveal reveal-delay-2">
+          <div class="card h-100">
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=60" class="card-img-top" alt="Bootstrap Cover Layout screenshot" loading="lazy">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Bootstrap Cover Layout</h5>
+              <p class="card-text flex-grow-1 text-muted">Modern landing page built with Bootstrap 5.</p>
+              <p class="small text-muted mb-3">Tech: HTML, CSS, Bootstrap 5</p>
+              <div class="d-flex gap-2 mt-auto">
+                <a class="btn btn-sm btn-accent" href="https://getbootstrap.com/docs/5.3/examples/cover/" target="_blank" rel="noopener" aria-label="Open demo for project 3">Live Demo</a>
+                <a class="btn btn-sm btn-outline-light" href="https://github.com/twbs/bootstrap" target="_blank" rel="noopener" aria-label="Open source code for project 3">Source</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Project 4 -->
+        <div class="col-12 col-md-6 col-lg-4 reveal">
+          <div class="card h-100">
+            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=60" class="card-img-top" alt="TodoMVC (React) screenshot" loading="lazy">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">TodoMVC (React)</h5>
+              <p class="card-text flex-grow-1 text-muted">Classic TodoMVC implemented in React.</p>
+              <p class="small text-muted mb-3">Tech: React, Vite</p>
+              <div class="d-flex gap-2 mt-auto">
+                <a class="btn btn-sm btn-accent" href="https://todomvc.com/examples/react/" target="_blank" rel="noopener" aria-label="Open demo for project 4">Live Demo</a>
+                <a class="btn btn-sm btn-outline-light" href="https://github.com/tastejs/todomvc" target="_blank" rel="noopener" aria-label="Open source code for project 4">Source</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Project 5 -->
+        <div class="col-12 col-md-6 col-lg-4 reveal reveal-delay-1">
+          <div class="card h-100">
+            <img src="https://images.unsplash.com/photo-1517148815978-75f6acaaf32c?auto=format&fit=crop&w=1200&q=60" class="card-img-top" alt="Chart.js Line Charts screenshot" loading="lazy">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Chart.js Line Charts</h5>
+              <p class="card-text flex-grow-1 text-muted">Interactive charts for analytics dashboards.</p>
+              <p class="small text-muted mb-3">Tech: Chart.js, HTML, JS</p>
+              <div class="d-flex gap-2 mt-auto">
+                <a class="btn btn-sm btn-accent" href="https://www.chartjs.org/docs/latest/samples/line/basic.html" target="_blank" rel="noopener" aria-label="Open demo for project 5">Live Demo</a>
+                <a class="btn btn-sm btn-outline-light" href="https://github.com/chartjs/Chart.js" target="_blank" rel="noopener" aria-label="Open source code for project 5">Source</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Project 6 -->
+        <div class="col-12 col-md-6 col-lg-4 reveal reveal-delay-2">
+          <div class="card h-100">
+            <img src="https://images.unsplash.com/photo-1502920514313-52581002a659?auto=format&fit=crop&w=1200&q=60" class="card-img-top" alt="Leaflet Interactive Map screenshot" loading="lazy">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Leaflet Interactive Map</h5>
+              <p class="card-text flex-grow-1 text-muted">Lightweight maps with markers and popups.</p>
+              <p class="small text-muted mb-3">Tech: Leaflet, JS</p>
+              <div class="d-flex gap-2 mt-auto">
+                <a class="btn btn-sm btn-accent" href="https://leafletjs.com/examples/quick-start/" target="_blank" rel="noopener" aria-label="Open demo for project 6">Live Demo</a>
+                <a class="btn btn-sm btn-outline-light" href="https://github.com/Leaflet/Leaflet" target="_blank" rel="noopener" aria-label="Open source code for project 6">Source</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience / Education -->
+  <section id="experience" class="py-5 bg-surface">
+    <div class="container">
+      <h3 class="section-title mb-4">Experience & Education</h3>
+      <div class="row g-4">
+        <div class="col-md-6 reveal">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Experience</h5>
+              <ul class="timeline list-unstyled mt-3 mb-0">
+                <li class="mb-3">
+                  <h6 class="mb-1 fw-semibold">Full Stack Developer — Tpwits</h6>
+                  <div class="small text-muted">2023 – Present</div>
+                  <p class="mb-0 mt-2 text-muted">Leading full‑stack development: responsive UIs, REST APIs, PostgreSQL/MySQL, CI/CD.</p>
+                </li>
+                <li class="mb-0">
+                  <h6 class="mb-1 fw-semibold">Full Stack Developer — Freelance</h6>
+                  <div class="small text-muted">2021 – 2023</div>
+                  <p class="mb-0 mt-2 text-muted">Delivered client projects with React, Django/Flask, and cloud deployments.</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 reveal reveal-delay-1">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Education</h5>
+              <ul class="timeline list-unstyled mt-3 mb-0">
+                <li class="mb-3">
+                  <h6 class="mb-1 fw-semibold">Professional Certifications (Web Development) — Online Platforms</h6>
+                  <div class="small text-muted">2019 – Present</div>
+                  <p class="mb-0 mt-2 text-muted">Completed courses in frontend, backend, databases, and DevOps.</p>
+                </li>
+                <li class="mb-0">
+                  <h6 class="mb-1 fw-semibold">Intermediate — Local Institute</h6>
+                  <div class="small text-muted">2017 – 2019</div>
+                  <p class="mb-0 mt-2 text-muted">Foundations in computer science and mathematics.</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-5">
+    <div class="container">
+      <h3 class="section-title mb-4">Contact</h3>
+      <div class="row g-4">
+        <div class="col-lg-5 reveal">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Get in touch</h5>
+              <p class="mb-4 text-muted">I am open to freelance, full-time and collaboration opportunities. Prefer a quick chat? Reach out via email, phone, or WhatsApp.</p>
+              <div class="vstack gap-3">
+                <div class="d-flex align-items-center justify-content-between">
+                  <div>
+                    <div class="small text-muted">Email</div>
+                    <a id="emailLink" class="fw-semibold text-decoration-none" href="mailto:rajazafeer461@gmail.com">rajazafeer461@gmail.com</a>
+                  </div>
+                  <button id="copyEmailBtn" class="btn btn-soft btn-sm" type="button" aria-label="Copy email to clipboard">Copy</button>
+                </div>
+                <div>
+                  <div class="small text-muted">Phone</div>
+                  <div class="fw-semibold" aria-label="Phone number">03485202559</div>
+                </div>
+                <div>
+                  <div class="small text-muted">WhatsApp</div>
+                  <a class="btn btn-success btn-sm" href="https://wa.me/923485202559" target="_blank" rel="noopener" aria-label="Open WhatsApp chat">Chat on WhatsApp</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-7 reveal reveal-delay-1">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Send a message</h5>
+              <form action="mailto:rajazafeer461@gmail.com" method="POST" enctype="text/plain" class="mt-3" aria-label="Contact form">
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control bg-surface border-subtle text-light" id="name" name="name" placeholder="Your name" required />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control bg-surface border-subtle text-light" id="email" name="email" placeholder="you@example.com" required />
+                  </div>
+                  <div class="col-12">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea class="form-control bg-surface border-subtle text-light" id="message" name="message" rows="5" placeholder="How can I help you?" required></textarea>
+                  </div>
+                  <div class="col-12 d-flex gap-2">
+                    <button type="submit" class="btn btn-accent" aria-label="Send email via your email app">Send</button>
+                    <button type="reset" class="btn btn-outline-light">Reset</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-4 bg-surface">
+    <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
+      <p class="mb-0 small text-muted">© <span id="year"></span> Raja Zafeer. All rights reserved.</p>
+      <div class="d-flex align-items-center gap-2">
+        <a class="social-link" href="https://github.com/USERNAME" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 .5a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.58 0-.29-.01-1.05-.02-2.06-3.34.73-4.04-1.61-4.04-1.61-.55-1.38-1.34-1.75-1.34-1.75-1.1-.75.08-.73.08-.73 1.22.09 1.87 1.26 1.87 1.26 1.08 1.86 2.82 1.32 3.51 1.01.11-.78.42-1.32.76-1.62-2.67-.3-5.47-1.33-5.47-5.92 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.56.12-3.25 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.69.24 2.94.12 3.25.77.84 1.24 1.91 1.24 3.22 0 4.6-2.8 5.61-5.48 5.91.43.37.81 1.1.81 2.23 0 1.61-.01 2.9-.01 3.29 0 .32.21.69.83.57A12 12 0 0 0 12 .5Z"/>
+          </svg>
+          <span class="visually-hidden">GitHub</span>
+        </a>
+        <a class="social-link" href="https://www.linkedin.com/in/USERNAME" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.95v5.66H9.35V9h3.42v1.56h.05c.48-.9 1.66-1.85 3.41-1.85 3.65 0 4.33 2.4 4.33 5.52v6.22ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.11 20.45H3.56V9h3.55v11.45Z"/>
+          </svg>
+          <span class="visually-hidden">LinkedIn</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Minimal enhancements + Animations Controller -->
+  <script>
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Copy email to clipboard with user feedback
+    (function () {
+      const btn = document.getElementById('copyEmailBtn');
+      const link = document.getElementById('emailLink');
+      if (!btn || !link) return;
+      btn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(link.textContent.trim());
+          const original = btn.textContent;
+          btn.textContent = 'Copied!';
+          btn.classList.remove('btn-soft');
+          btn.classList.add('btn-accent');
+          setTimeout(() => {
+            btn.textContent = original;
+            btn.classList.remove('btn-accent');
+            btn.classList.add('btn-soft');
+          }, 1600);
+        } catch (e) {
+          window.location.href = link.href;
+        }
+      });
+    })();
+
+    // Navbar ready + sticky shadow
+    (function () {
+      const nav = document.getElementById('topNav');
+      requestAnimationFrame(() => nav.classList.add('ready'));
+      const onScroll = () => { if (window.scrollY > 8) nav.classList.add('stuck'); else nav.classList.remove('stuck'); };
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+    })();
+
+    // Collapse navbar after clicking a link (mobile)
+    (function () {
+      const navMenu = document.getElementById('navMenu');
+      if (!navMenu) return;
+      navMenu.querySelectorAll('a.nav-link').forEach((a) => {
+        a.addEventListener('click', () => {
+          const collapse = bootstrap.Collapse.getOrCreateInstance(navMenu);
+          collapse.hide();
+        });
+      });
+    })();
+
+    // Reveal on scroll + animate progress bars + underline titles + stagger badges
+    (function () {
+      const io = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+            if (entry.target.matches('section .section-title')) entry.target.classList.add('show-underline');
+            // Animate nested progress bars
+            entry.target.querySelectorAll('.progress-bar[data-progress]')?.forEach((bar, idx) => {
+              const pct = String(bar.getAttribute('data-progress') || '0').replace(/[^0-9.]/g, '');
+              setTimeout(() => { bar.style.width = pct + '%'; }, idx * 120);
+            });
+            // Stagger children for nice entrance
+            if (entry.target.classList.contains('stagger-on-show')) {
+              [...entry.target.children].forEach((child, i) => {
+                child.style.transitionDelay = (i * 70) + 'ms';
+                child.classList.add('show');
+              });
+            }
+            io.unobserve(entry.target);
+          }
+        }
+      }, { threshold: 0.18 });
+
+      document.querySelectorAll('.reveal, section .section-title, .stagger-on-show').forEach((el) => io.observe(el));
+    })();
+
+    // Hero parallax background (uses CSS var --parallax)
+    (function () {
+      let ticking = false;
+      const onScroll = () => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            document.documentElement.style.setProperty('--parallax', String(window.scrollY));
+            ticking = false;
+          });
+          ticking = true;
+        }
+      };
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+    })();
+
+    // Subtle 3D tilt for profile image (desktop) + tap bounce (mobile)
+    (function () {
+      const wrap = document.getElementById('profileTilt');
+      if (!wrap) return;
+      const img = wrap.querySelector('.profile-img');
+      let rect;
+      const max = 10; // degrees
+      const updateRect = () => { rect = wrap.getBoundingClientRect(); };
+      updateRect();
+      window.addEventListener('resize', updateRect);
+
+      const tilt = (x, y) => {
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dx = (x - cx) / (rect.width / 2);
+        const dy = (y - cy) / (rect.height / 2);
+        const rx = (+dy * max).toFixed(2);
+        const ry = (-dx * max).toFixed(2);
+        img.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) scale(1.02)`;
+      };
+      const reset = () => { img.style.transform = ''; };
+
+      wrap.addEventListener('pointermove', (e) => { if (e.pointerType === 'mouse') tilt(e.clientX, e.clientY); });
+      wrap.addEventListener('pointerleave', reset);
+      wrap.addEventListener('pointerdown', () => { img.style.transform = 'scale(0.98)'; });
+      wrap.addEventListener('pointerup', reset);
+    })();
+  </script>
+</body>
+</html>
